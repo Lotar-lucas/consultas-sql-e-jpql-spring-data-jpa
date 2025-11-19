@@ -23,12 +23,20 @@ public class Uri2602Application  implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception {
     List<CustomerMinProjection> list = customerRepository.searchWithSQL("RS");
-
     //Conversão da lista de CustomerMinProjection para CustomerMinDTO
     List<CustomerMinDTO> result1 = list.stream().map(CustomerMinDTO::new).toList();
 
+    System.out.println("\n Resultado SQL - Projection:");
     for (CustomerMinDTO obj : result1 ) {
       //Chama o método toString() de CustomerMinDTO
+      System.out.println(obj);
+    }
+
+    System.out.println("\n\n");
+
+    List<CustomerMinDTO> list2 = customerRepository.searchWithJPQL("RS");
+    System.out.println(" Resultado JPQL - Projection:");
+    for (CustomerMinDTO obj : list2 ) {
       System.out.println(obj);
     }
   }
